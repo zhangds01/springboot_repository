@@ -14,6 +14,25 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequestMapping("/request_data_forwarding")
 public class RequestDataForwarding {
+    @RequestMapping("/stock_inquiry")
+    public Object stockInquiry(String matName){
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://10.1.128.59:7002/ncpmsmm/receiveMessage";
+        Class responseType = String.class;
+        HttpHeaders head = new HttpHeaders();
+        head.add("Content-Type","application/json");
+        head.add("serviceId","MM_QLT_01");
+        String body = "";
+        if (!matName.equals("") && !(matName == null)){
+            body = "{\n" +
+                    "    \"matName\":\""+matName+"\"\n" +
+                    "}\n";
+        }
+        HttpEntity<String> entity = new HttpEntity(body, head);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, responseType);
+        JSONObject jsonObject = JSONObject.parseObject(responseEntity.getBody());
+        return jsonObject;
+    }
     @RequestMapping("/get_goods_all_life")
     public Result getGoodsAllLife(String batchNo){
         RestTemplate restTemplate = new RestTemplate();

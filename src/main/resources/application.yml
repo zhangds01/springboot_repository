@@ -5,7 +5,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://35.78.106.202/db_warehouse_mysql8?serverTimezone=GMT%2b8
+    url: jdbc:mysql://0vo.cc/db_warehouse_mysql8?serverTimezone=GMT%2b8
     username: root
     password: pwd123456
   servlet:
